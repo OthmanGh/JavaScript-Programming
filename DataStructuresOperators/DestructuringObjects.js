@@ -24,4 +24,57 @@ const restaurant = {
       close: 24,
     },
   },
+
+  // Methods :
+  orderDelivery: function ({
+    startIdx = 1,
+    time = '10:00',
+    address,
+    mainIdx = 0,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[startIdx]} and ${this.mainMenu[mainIdx]} will be deliverd to ${address} at ${time}`
+    );
+  },
 };
+
+// ! To destructure obejcts we use the curly braces, then provide variables names that exactly matche the propertry names that we want to retrieve from the object
+
+const { name, categories, openingHours } = restaurant;
+console.log(name, categories, openingHours);
+
+// what if we want different variable name ?
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+
+console.log(restaurantName, hours, tags);
+
+// setting default value
+const { menu = 'default value', starterMenu: startes = [] } = restaurant;
+console.log(menu, startes);
+
+// Mutating variables:
+let a = 444;
+let b = 888;
+
+const obj = { a: 23, b: 10, c: 27 };
+({ a, b } = obj);
+console.log(a, b);
+
+// Nested Objects :
+const {
+  fri: { open: openHour = '00', close: closeHour = '00' },
+} = restaurant.openingHours;
+
+console.log(openHour, closeHour);
+
+// passing object as parameter
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del sole 21',
+  mainIdx: 2,
+  startIdx: 2,
+});

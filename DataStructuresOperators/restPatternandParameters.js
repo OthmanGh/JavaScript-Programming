@@ -40,7 +40,7 @@ const restaurant = {
 };
 
 // rest Pattern looks exactly like spread operator so it has the same syntax but it actually does the opposite.
-// so it collects multiple elements and condense them into an array
+// it collects multiple elements and condense them into an array
 
 // Destructuring :
 

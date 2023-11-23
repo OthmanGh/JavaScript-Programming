@@ -1,3 +1,21 @@
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const openingHours = {
+  // compute property names
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [`day-${2 + 4}`]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -5,40 +23,32 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  // ! ES6 enhanced object literals :
+  openingHours,
 
   // Methods :
-  orderDelivery: function ({
-    startIdx = 1,
-    time = '10:00',
-    address,
-    mainIdx = 0,
-  }) {
+  // traditional way
+  // order: function (startIdx, mainIdx) {
+  //   return [this.starterMenu[startIdx], this.mainMenu[mainIdx]];
+  // },
+  // enhanced object literals :
+  order(startIdx, mainIdx) {
+    return [this.starterMenu[startIdx], this.mainMenu[mainIdx]];
+  },
+
+  orderDelivery({ startIdx = 1, time = '10:00', address, mainIdx = 0 }) {
     console.log(
       `Order received! ${this.starterMenu[startIdx]} and ${this.mainMenu[mainIdx]} will be deliverd to ${address} at ${time}`
     );
   },
 
-  orderPasta: function (ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     console.log(
       `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
     );
   },
 
-  orderPizza: function (mainIng, otherIng) {
+  orderPizza(mainIng, otherIng) {
     console.log(mainIng);
     console.log(otherIng);
   },
@@ -66,20 +76,18 @@ for (const [idx, item] of menu.entries()) console.log(`${idx + 1} : ${item}`);
 // With optional chaining, if a property in the chain is null or undefined, the expression short-circuits, and the entire chain evaluates to undefined.
 
 // check if monday exist on openinghours object has friday && if its exist in the first place
-if (restaurant.openingHours.fri && restaurant.openingHours)
-  console.log(restaurant.openingHours.fri.open);
+if (openingHours.fri && openingHours) console.log(openingHours.fri.open);
 
-if (restaurant.openingHours.mon) console.log(restaurant.openingHours.mon.open);
+if (openingHours.mon) console.log(openingHours.mon.open);
 
 //* With optional chaining ?
-console.log(restaurant.openingHours.mon?.open);
-//console.log(restaurant.openingHours.mon.open); error !!
+console.log(openingHours.mon?.open);
+//console.log(openingHours.mon.open); error !!
 
 // example :
-const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
-for (const day of days) {
-  restaurant.openingHours[day]?.open === undefined
+for (const day of weekdays) {
+  openingHours[day]?.open === undefined
     ? console.log(`${restaurant.name} is closed on ${day}`)
     : console.log(`${restaurant.name} is open on ${day}`);
 }
@@ -100,23 +108,23 @@ console.log(users[1]?.name ?? 'User array empty');
 // ! Looping Objects  : keys, values, entries
 
 // Property Names : Object.keys(obj)
-const properties = Object.keys(restaurant.openingHours);
+const properties = Object.keys(openingHours);
 console.log(properties);
 
 let openStr = `We are open on ${properties.length} days: `;
 
-for (const day of Object.keys(restaurant.openingHours)) {
+for (const day of Object.keys(openingHours)) {
   openStr += `${day}, `;
 }
 
 console.log(openStr);
 
 // Property Values : Object.values(obj)
-const values = Object.values(restaurant.openingHours);
+const values = Object.values(openingHours);
 console.log(values);
 
 // Entire object
-const entries = Object.entries(restaurant.openingHours);
+const entries = Object.entries(openingHours);
 
 console.log(entries);
 

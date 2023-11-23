@@ -60,3 +60,32 @@ const game = {
     team2: 6.5,
   },
 };
+
+// 1
+for (const [idx, player] of game.scored.entries())
+  console.log(`Goal ${idx + 1}: ${player}`);
+
+// 2
+// Object.values(game.odds)  array of values
+let averageOdd = 0;
+const odds = Object.values(game.odds);
+for (const val of odds) {
+  averageOdd += val;
+}
+
+averageOdd /= odds.length;
+console.log(`Average Odd : ${averageOdd}`);
+
+// 3
+for (const [key, value] of Object.entries(game?.odds)) {
+  if (game?.[key] === undefined) console.log(`        Odd of draw: ${value}`);
+  else console.log(`        Odd of victory ${game[key]}: ${value}`);
+}
+
+// BONUS:
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+}
+
+console.log(scorers);

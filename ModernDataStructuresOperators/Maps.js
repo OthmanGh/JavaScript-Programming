@@ -45,3 +45,31 @@ match.set(['real', 'barca'], 'Tonight Match');
 console.log(match);
 
 console.log(match.get(['real', 'barca'])); // passed arrays are not the same object in the heap, that's why we get undefined
+
+const question = new Map([
+  ['questions', 'What is the best programming language in the world'],
+  [1, 'C'],
+  [2, 'C++'],
+  [3, 'JS'],
+  ['sdf;', 'jodsij'],
+]);
+
+console.log(question);
+
+// Convert Objects to map
+const hourMap = new Map(Object.entries[question['questions']]);
+
+console.log(hourMap);
+
+// Maps : Iteration
+// Object.entries convert object to an iterable so we can loop through them, However Maps are iterables...
+
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`${key} : ${value}`);
+}
+
+// Convert Map to array :
+console.log([...question]);
+console.log([...question]);
+console.log([...question.keys()]);
+console.log([...question.values()]);

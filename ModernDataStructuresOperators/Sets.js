@@ -36,7 +36,5 @@ const uniqueStaff = new Set(staff);
 
 // get rid of duplicates :
 console.log(uniqueStaff);
-
 console.log([...uniqueStaff]); // convert to array
-
 console.log(new Set('Othman Al Ghandour'));

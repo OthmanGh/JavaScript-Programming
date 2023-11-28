@@ -1,6 +1,5 @@
 ///////////////////////////////////////
 // Coding Challenge #3
-
 /* 
 Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
 
@@ -12,7 +11,6 @@ Let's continue with our football betting app! This time, we have a map with a lo
 
 GOOD LUCK 😀
 */
-
 const gameEvents = new Map([
   [17, '⚽️ GOAL'],
   [36, '🔁 Substitution'],
@@ -26,3 +24,22 @@ const gameEvents = new Map([
   [80, '⚽️ GOAL'],
   [92, '🔶 Yellow card'],
 ]);
+// 1 :
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+// 2 :
+gameEvents.delete(64);
+console.log(gameEvents);
+
+// 3 :
+let time = [...gameEvents.keys()].pop();
+console.log(
+  `An event happend, on average every ${time / gameEvents.size} minutes`
+);
+
+// 4 :
+for (const [min, event] of gameEvents) {
+  const half = min > 45 ? 'SECOND' : 'FIRST';
+  console.log(`[${half} HALF] ${min} : ${event}`);
+}

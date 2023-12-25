@@ -21,6 +21,12 @@ const closeModal = function () {
 showBtns.forEach(btn => {
   btn.addEventListener('click', showModal);
 });
-
 closeBtn.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
+
+// keyboard events are so called global events
+// when event occurs we can have access to infos related to that event in the event handler function event object (e)
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+});
